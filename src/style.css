@@ -1,0 +1,33 @@
+.d-flex input {
+  margin: 0.9em 0em;
+}
+
+.d-flex button {
+  margin: 1.5em 0.6em;
+  padding: 0.3em 2.4em;
+}
+
+.container table {
+  margin: 1em 10em;
+}
+
+table .btnedit,
+.btndelete {
+  cursor: pointer;
+}
+
+/* Message */
+
+.updatemsg,
+.deletemsg,
+.insertmsg {
+  position: absolute;
+  top: -50px;
+  transition: 0.8s ease;
+}
+
+.insertmsg.active,
+.updatemsg.active,
+.deletemsg.active {
+  top: 0px;
+}
