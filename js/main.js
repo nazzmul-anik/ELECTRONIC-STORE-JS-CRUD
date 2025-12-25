@@ -26,7 +26,11 @@ window.onload = () => {
 
 function textId(textboxid) {
   getData(db.products, (data) => {
-    textboxid.value = data.id + 1 || 1;
+    if (!data || !data.id) {
+      textboxid.value = 1;
+    } else {
+      textboxid.value = data.id + 1;
+    }
   });
 }
 
@@ -140,8 +144,8 @@ btnupdate.addEventListener("click", () => {
 });
 
 // Delete Button Events
-btndelete.addEventListener("click", () => {
-  db.delete();
+btndelete.addEventListener("click", async () => {
+  await db.delete();
   db = productdb("Productdb", {
     products: `++id, name, seller, price`,
   });

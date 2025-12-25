@@ -28,32 +28,21 @@ const bulkcreate = (dbtable, data) => {
 
 // Check textbox validation
 const empty = (object) => {
-  let flag = false;
-  for (const value in object) {
-    if (object[value] != "" && object.hasOwnProperty(value)) {
-      flag = true;
-    } else {
-      flag = false;
-    }
-  }
-
-  return flag;
+  return Object.values(object).every((v) => v !== "");
 };
 
 // Get data from Database
 
 const getData = (dbtable, fn) => {
   let index = 0;
-  let obj = {};
 
-  dbtable.count((count) => {
-    if (count) {
-      dbtable.each((table) => {
-        obj = ShortObj(table);
-        fn(obj, index++);
-      });
+  dbtable.count().then((count) => {
+    if (count === 0) {
+      fn(null);
     } else {
-      fn(0);
+      dbtable.each((table) => {
+        fn(ShortObj(table), index++);
+      });
     }
   });
 };
